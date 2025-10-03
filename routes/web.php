@@ -3,42 +3,49 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Client\DashboardController as ClientDashboardController;
+use App\Http\Controllers\Gudang\DashboardController as GudangDashboardController;
+use App\Http\Controllers\Dapur\DashboardController as DapurDashboardController;
 
 
 
 Route::get('/', function () {
+    // $user = Auth::user(); 
+    // dd($user->role); 
+
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
     $user = Auth::user();
-    if ($user->role === 'admin'){
-        return redirect('admin.dashboard');
+    // dd($user->role); 
+    if ($user->role === 'gudang'){
+        return redirect()->route('gudang.dashboard');
     }else{
-        return redirect('client.dashboard');
+        return redirect()->route('dapur.dashboard');
     }
         
-    return view('dashboard');
+    return view('/');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::middleware(['auth'])->group(function () {
-    // Dashboard untuk user biasa
-    Route::get('/dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
-
-    // Group Rute Khusus Admin
-    Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    });
-});
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Grup Rute Khusus GUDANG
+    Route::middleware('role:gudang')->prefix('gudang')->name('gudang.')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('gudang.dashboard');
+        })->name('dashboard');
+    });
+
+    // Grup Rute Khusus DAPUR
+    Route::middleware('role:dapur')->prefix('dapur')->name('dapur.')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('dapur.dashboard');
+        })->name('dashboard');
+    });
 });
 
 require __DIR__.'/auth.php';

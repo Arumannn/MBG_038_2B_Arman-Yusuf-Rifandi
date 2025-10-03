@@ -14,14 +14,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Membersihkan tabel sebelum memasukkan data baru
-        DB::table('users')->truncate();
 
         DB::table('users')->insert([
             [
                 'id' => 1,
                 'name' => 'Budi Santoso',
                 'email' => 'budi.gudang@mbg.id',
-                'password' => Hash::make('pass123'), // <- Diubah ke Bcrypt
+                'password' => Hash::make('pass123'),
                 'role' => 'gudang',
                 
                 
