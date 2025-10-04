@@ -18,10 +18,16 @@
                             {{ __('Bahan Baku') }}
                         </x-nav-link>
                         
-                        <x-nav-link href="#" :active="false">
-                            {{ __('Permintaan Masuk') }}
+                        <x-nav-link :href="route('gudang.permintaan.index')" :active="request()->routeIs('gudang.permintaan.*')">
+                            {{ __('Permintaan') }}
                         </x-nav-link>
 
+                    @endif
+
+                    @if(Auth::user()->role == 'dapur')
+                        <x-nav-link :href="route('dapur.permintaan.create')" :active="request()->routeIs('dapur.permintaan.*')">
+                            {{ __('Buat Permintaan') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -80,11 +86,18 @@
                     {{ __('Bahan Baku') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link href="#" :active="false">
-                    {{ __('Permintaan Masuk') }}
+                <x-responsive-nav-link :href="route('gudang.permintaan.index')" :active="request()->routeIs('gudang.permintaan.*')">
+                    {{ __('Permintaan') }}
                 </x-responsive-nav-link>
-
             @endif
+
+            @if(Auth::user()->role == 'dapur')
+                <x-responsive-nav-link :href="route('dapur.permintaan.create')" :active="request()->routeIs('dapur.permintaan.*')">
+                    {{ __('Buat Permintaan') }}
+                </x-responsive-nav-link>
+            @endif  
+
+            
         </div>
 
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

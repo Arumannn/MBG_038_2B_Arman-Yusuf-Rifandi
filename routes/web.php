@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function () {
             return view('gudang.dashboard');
         })->name('dashboard');
 
+        Route::get('/permintaan', [\App\Http\Controllers\Gudang\PermintaanController::class, 'index'])->name('permintaan.index');
+        Route::get('/permintaan/{permintaan}', [\App\Http\Controllers\Gudang\PermintaanController::class, 'show'])->name('permintaan.show');
+
         Route::get('/bahan-baku', [BahanBakuController::class, 'index'])->name('bahanbaku.index');
         Route::get('/bahan-baku/create', [BahanBakuController::class, 'create'])->name('bahanbaku.create');
         Route::post('/bahan-baku', [BahanBakuController::class, 'store'])->name('bahanbaku.store');
@@ -60,6 +63,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', function () {
             return view('dapur.dashboard');
         })->name('dashboard');
+        
+        Route::get('/permintaan/create', [\App\Http\Controllers\Dapur\PermintaanController::class, 'create'])->name('permintaan.create');
+        Route::post('/permintaan', [\App\Http\Controllers\Dapur\PermintaanController::class, 'store'])->name('permintaan.store');
     });
 
 
