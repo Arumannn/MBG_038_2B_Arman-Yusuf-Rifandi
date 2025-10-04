@@ -33,7 +33,7 @@
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nama</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Kategori</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Jumlah</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tgl Kadaluarsa</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tgl kadaluarsa</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
                                     {{-- highlight-start --}}
                                     {{-- 1. TAMBAHKAN HEADER TABEL UNTUK AKSI --}}
@@ -52,8 +52,8 @@
                                             {{-- PERBAIKAN LOGIKA PEWARNAAN STATUS --}}
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                                 @if($bahan->status == 'Tersedia') bg-green-100 text-green-800 @endif
-                                                @if($bahan->status == 'Segera Kadaluarsa') bg-yellow-100 text-yellow-800 @endif
-                                                @if($bahan->status == 'Kadaluarsa') bg-red-100 text-red-800 @endif
+                                                @if($bahan->status == 'Segera kadaluarsa') bg-yellow-100 text-yellow-800 @endif
+                                                @if($bahan->status == 'kadaluarsa') bg-red-100 text-red-800 @endif
                                                 @if($bahan->status == 'Habis') bg-gray-100 text-gray-800 @endif
                                             ">
                                                 {{ $bahan->status }}

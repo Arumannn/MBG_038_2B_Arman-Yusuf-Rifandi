@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BahanBaku extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    const UPDATED_AT = null;
     protected $table = 'bahan_baku';
 
     protected $fillable = [

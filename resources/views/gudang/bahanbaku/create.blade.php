@@ -43,7 +43,7 @@
                                 <input type="date" name="tanggal_masuk" id="tanggal_masuk" value="{{ old('tanggal_masuk') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" required>
                             </div>
                             <div>
-                                <label for="tanggal_kadaluarsa" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal Kadaluarsa</label>
+                                <label for="tanggal_kadaluarsa" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal kadaluarsa</label>
                                 <input type="date" name="tanggal_kadaluarsa" id="tanggal_kadaluarsa" value="{{ old('tanggal_kadaluarsa') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" required>
                             </div>
                         </div>

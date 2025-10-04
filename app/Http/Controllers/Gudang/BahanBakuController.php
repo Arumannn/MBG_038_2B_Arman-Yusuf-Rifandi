@@ -19,8 +19,8 @@ class BahanBakuController extends Controller
     $hariIni = Carbon::now()->startOfDay();
 
     foreach ($bahanBakus as $bahan) {
-        $tanggalKadaluarsa = Carbon::parse($bahan->tanggal_kadaluarsa)->startOfDay();
-        $selisihHari = $hariIni->diffInDays($tanggalKadaluarsa, false);
+    $tanggalKadaluarsa = Carbon::parse($bahan->tanggal_kadaluarsa)->startOfDay();
+    $selisihHari = $hariIni->diffInDays($tanggalKadaluarsa, false);
 
         if ($selisihHari < 0) {
             $bahan->status = 'Kadaluarsa';
@@ -31,6 +31,7 @@ class BahanBakuController extends Controller
         } else {
             $bahan->status = 'Tersedia';
         }
+        $bahan->save(); 
     }
 
     return view('gudang.bahanbaku.index', compact('bahanBakus'));
@@ -95,6 +96,7 @@ class BahanBakuController extends Controller
      */
     public function showDeleteConfirmation(BahanBaku $bahanBaku)
     {
+        // dd($bahanBaku->status);
         return view('gudang.bahanbaku.delete', compact('bahanBaku'));
     }
 
@@ -103,9 +105,9 @@ class BahanBakuController extends Controller
      */
     public function destroy(BahanBaku $bahanBaku)
     {
-        // Aturan: Hanya boleh menghapus jika status 'Kadaluarsa'
-        if ($bahanBaku->status !== 'Kadaluarsa') {
-            return redirect()->route('gudang.bahanbaku.index')->with('error', 'Hanya bahan baku dengan status Kadaluarsa yang dapat dihapus.');
+        
+        if ($bahanBaku->status !== 'kadaluarsa') {
+            return redirect()->route('gudang.bahanbaku.index')->with('error', 'Hanya bahan baku dengan status kadaluarsa yang dapat dihapus.');
         }
 
         $bahanBaku->delete();
