@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
         
         Route::get('/permintaan/create', [\App\Http\Controllers\Dapur\PermintaanController::class, 'create'])->name('permintaan.create');
         Route::post('/permintaan', [\App\Http\Controllers\Dapur\PermintaanController::class, 'store'])->name('permintaan.store');
+        Route::get('/permintaan/history', [\App\Http\Controllers\Dapur\PermintaanController::class, 'history'])->name('permintaan.history');
     });
 
 

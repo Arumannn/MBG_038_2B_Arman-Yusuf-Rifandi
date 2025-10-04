@@ -25,8 +25,12 @@
                     @endif
 
                     @if(Auth::user()->role == 'dapur')
-                        <x-nav-link :href="route('dapur.permintaan.create')" :active="request()->routeIs('dapur.permintaan.*')">
+                        <x-nav-link :href="route('dapur.permintaan.create')" :active="request()->routeIs('dapur.permintaan.create')">
                             {{ __('Buat Permintaan') }}
+                        </x-nav-link>
+                        
+                        <x-nav-link :href="route('dapur.permintaan.history')" :active="request()->routeIs('dapur.permintaan.history')">
+                            {{ __('Riwayat Permintaan') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -94,8 +98,12 @@
             @endif
 
             @if(Auth::user()->role == 'dapur')
-                <x-responsive-nav-link :href="route('dapur.permintaan.create')" :active="request()->routeIs('dapur.permintaan.*')">
+                <x-responsive-nav-link :href="route('dapur.permintaan.create')" :active="request()->routeIs('dapur.permintaan.create')">
                     {{ __('Buat Permintaan') }}
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="route('dapur.permintaan.history')" :active="request()->routeIs('dapur.permintaan.history')">
+                    {{ __('Riwayat Permintaan') }}
                 </x-responsive-nav-link>
             @endif  
 
