@@ -37,9 +37,8 @@ Route::middleware('auth')->group(function () {
 
     // Grup Rute Khusus GUDANG
     Route::middleware('role:gudang')->prefix('gudang')->name('gudang.')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('gudang.dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\Gudang\DashboardController::class, 'index'])->name('dashboard');
+
 
         
         Route::get('/permintaan', [\App\Http\Controllers\Gudang\PermintaanController::class, 'index'])->name('permintaan.index');
@@ -64,9 +63,8 @@ Route::middleware('auth')->group(function () {
 
     // Grup Rute Khusus DAPUR
     Route::middleware('role:dapur')->prefix('dapur')->name('dapur.')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('dapur.dashboard');
-        })->name('dashboard');
+         Route::get('/dashboard', [\App\Http\Controllers\Dapur\DashboardController::class, 'index'])->name('dashboard');
+
         
         Route::get('/permintaan/create', [\App\Http\Controllers\Dapur\PermintaanController::class, 'create'])->name('permintaan.create');
         Route::post('/permintaan', [\App\Http\Controllers\Dapur\PermintaanController::class, 'store'])->name('permintaan.store');

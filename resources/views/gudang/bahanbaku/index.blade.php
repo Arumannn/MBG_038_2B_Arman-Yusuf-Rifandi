@@ -52,7 +52,7 @@
                                             {{-- PERBAIKAN LOGIKA PEWARNAAN STATUS --}}
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                                 @if($bahan->status == 'Tersedia') bg-green-100 text-green-800 @endif
-                                                @if($bahan->status == 'Segera kadaluarsa') bg-yellow-100 text-yellow-800 @endif
+                                                @if($bahan->status == 'segera_kadaluarsa') bg-yellow-100 text-yellow-800 @endif
                                                 @if($bahan->status == 'kadaluarsa') bg-red-100 text-red-800 @endif
                                                 @if($bahan->status == 'Habis') bg-gray-100 text-gray-800 @endif
                                             ">

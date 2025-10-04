@@ -23,11 +23,11 @@ class BahanBakuController extends Controller
     $selisihHari = $hariIni->diffInDays($tanggalKadaluarsa, false);
 
         if ($selisihHari < 0) {
-            $bahan->status = 'Kadaluarsa';
+            $bahan->status = 'kadaluarsa';
         } elseif ($bahan->jumlah == 0) {
             $bahan->status = 'Habis';
         } elseif ($selisihHari <= 3) {
-            $bahan->status = 'Segera Kadaluarsa';
+            $bahan->status = 'segera_kadaluarsa';
         } else {
             $bahan->status = 'Tersedia';
         }

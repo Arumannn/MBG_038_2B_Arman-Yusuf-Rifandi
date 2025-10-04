@@ -22,7 +22,7 @@
                         <p><strong>Status Saat Ini:</strong> 
                             <span class="
                                 @if($bahanBaku->status == 'kadaluarsa') text-red-600 
-                                @elseif($bahanBaku->status == 'Segera kadaluarsa') text-yellow-600
+                                @elseif($bahanBaku->status == 'segera_kadaluarsa') text-yellow-600
                                 @elseif($bahanBaku->status == 'Habis') text-gray-600
                                 @else text-green-600
                                 @endif
