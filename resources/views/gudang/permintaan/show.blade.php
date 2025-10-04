@@ -62,7 +62,8 @@
 
     {{-- Modal Konfirmasi untuk Menyetujui --}}
     <x-modal name="confirm-permintaan-approval" focusable>
-        <form method="post" action="#" class="p-6">
+            <form method="post" action="{{ route('gudang.permintaan.approve', $permintaan->id) }}" class="p-6">
+
             @csrf
             
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -87,7 +88,7 @@
 
     {{-- Modal Konfirmasi untuk Menolak --}}
     <x-modal name="confirm-permintaan-rejection" focusable>
-        <form method="post" action="#" class="p-6">
+            <form method="post" action="{{ route('gudang.permintaan.reject', $permintaan->id) }}" class="p-6">
             @csrf
 
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">

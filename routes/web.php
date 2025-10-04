@@ -41,9 +41,13 @@ Route::middleware('auth')->group(function () {
             return view('gudang.dashboard');
         })->name('dashboard');
 
+        
         Route::get('/permintaan', [\App\Http\Controllers\Gudang\PermintaanController::class, 'index'])->name('permintaan.index');
         Route::get('/permintaan/{permintaan}', [\App\Http\Controllers\Gudang\PermintaanController::class, 'show'])->name('permintaan.show');
-
+        Route::post('/permintaan/{permintaan}/approve', [\App\Http\Controllers\Gudang\PermintaanController::class, 'approve'])->name('permintaan.approve');
+        Route::post('/permintaan/{permintaan}/reject', [\App\Http\Controllers\Gudang\PermintaanController::class, 'reject'])->name('permintaan.reject');
+        
+        
         Route::get('/bahan-baku', [BahanBakuController::class, 'index'])->name('bahanbaku.index');
         Route::get('/bahan-baku/create', [BahanBakuController::class, 'create'])->name('bahanbaku.create');
         Route::post('/bahan-baku', [BahanBakuController::class, 'store'])->name('bahanbaku.store');
