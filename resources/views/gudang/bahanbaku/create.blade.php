@@ -1,60 +1,92 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Tambah Bahan Baku Baru') }}
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-bold text-3xl text-white leading-tight" style="color: #ffffff;">
+                {{ __('Tambah Bahan Baku Baru') }}
+            </h2>
+            <div class="flex items-center space-x-4">
+                <a href="{{ route('gudang.bahanbaku.index') }}" 
+                   class="inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-300 transform hover:scale-105"
+                   style="background: linear-gradient(145deg, #6b7280 0%, #4b5563 100%); box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Kembali
+                </a>
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow-2xl rounded-2xl" 
+                 style="background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); border: 2px solid #ffbb31; box-shadow: 0 20px 40px rgba(4, 3, 72, 0.1);">
+                <div class="p-8">
                     @if ($errors->any())
-                        <div class="mb-4">
-                            <ul class="list-disc list-inside text-sm text-red-600">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                        <div class="mb-6 p-4 rounded-xl border-l-4" 
+                             style="background: linear-gradient(145deg, #fef2f2 0%, #fecaca 100%); border-color: #ef4444; border-left-color: #ef4444;">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5" style="color: #ef4444;" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-medium" style="color: #991b1b;">Terdapat kesalahan dalam form:</h3>
+                                    <ul class="mt-2 text-sm list-disc list-inside" style="color: #991b1b;">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     @endif
 
-                    <form action="{{ route('gudang.bahanbaku.store') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menyimpan data ini?');">
+                    <form action="{{ route('gudang.bahanbaku.store') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menyimpan data ini?');" class="space-y-6">
                         @csrf
-                        <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label for="nama" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Bahan</label>
-                                <input type="text" name="nama" id="nama" value="{{ old('nama') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" required>
+                                <x-input-label for="nama" :value="__('Nama Bahan')" />
+                                <x-text-input id="nama" class="block mt-2 w-full" type="text" name="nama" :value="old('nama')" required autofocus />
+                                <x-input-error :messages="$errors->get('nama')" class="mt-2" />
                             </div>
                             <div>
-                                <label for="kategori" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Kategori</label>
-                                <input type="text" name="kategori" id="kategori" value="{{ old('kategori') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" required>
+                                <x-input-label for="kategori" :value="__('Kategori')" />
+                                <x-text-input id="kategori" class="block mt-2 w-full" type="text" name="kategori" :value="old('kategori')" required />
+                                <x-input-error :messages="$errors->get('kategori')" class="mt-2" />
                             </div>
                             <div>
-                                <label for="jumlah" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jumlah</label>
-                                <input type="number" name="jumlah" id="jumlah" value="{{ old('jumlah') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" required min="0">
+                                <x-input-label for="jumlah" :value="__('Jumlah')" />
+                                <x-text-input id="jumlah" class="block mt-2 w-full" type="number" name="jumlah" :value="old('jumlah')" required min="0" />
+                                <x-input-error :messages="$errors->get('jumlah')" class="mt-2" />
                             </div>
                             <div>
-                                <label for="satuan" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Satuan</label>
-                                <input type="text" name="satuan" id="satuan" value="{{ old('satuan') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" required>
+                                <x-input-label for="satuan" :value="__('Satuan')" />
+                                <x-text-input id="satuan" class="block mt-2 w-full" type="text" name="satuan" :value="old('satuan')" required />
+                                <x-input-error :messages="$errors->get('satuan')" class="mt-2" />
                             </div>
                             <div>
-                                <label for="tanggal_masuk" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal Masuk</label>
-                                <input type="date" name="tanggal_masuk" id="tanggal_masuk" value="{{ old('tanggal_masuk') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" required>
+                                <x-input-label for="tanggal_masuk" :value="__('Tanggal Masuk')" />
+                                <x-text-input id="tanggal_masuk" class="block mt-2 w-full" type="date" name="tanggal_masuk" :value="old('tanggal_masuk')" required />
+                                <x-input-error :messages="$errors->get('tanggal_masuk')" class="mt-2" />
                             </div>
                             <div>
-                                <label for="tanggal_kadaluarsa" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal kadaluarsa</label>
-                                <input type="date" name="tanggal_kadaluarsa" id="tanggal_kadaluarsa" value="{{ old('tanggal_kadaluarsa') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" required>
+                                <x-input-label for="tanggal_kadaluarsa" :value="__('Tanggal Kadaluarsa')" />
+                                <x-text-input id="tanggal_kadaluarsa" class="block mt-2 w-full" type="date" name="tanggal_kadaluarsa" :value="old('tanggal_kadaluarsa')" required />
+                                <x-input-error :messages="$errors->get('tanggal_kadaluarsa')" class="mt-2" />
                             </div>
                         </div>
 
-                        <div class="mt-6">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
-                                Simpan
-                            </button>
-                             <a href="{{ route('gudang.bahanbaku.index') }}" class="ml-4 inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
+                        <div class="flex items-center justify-end space-x-4 pt-6">
+                            <a href="{{ route('gudang.bahanbaku.index') }}" 
+                               class="inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 transform hover:scale-105"
+                               style="background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); border: 2px solid #6b7280; color: #6b7280; box-shadow: 0 4px 15px rgba(107, 114, 128, 0.1);">
                                 Batal
                             </a>
+                            <x-primary-button class="px-8 py-3 text-lg">
+                                {{ __('Simpan') }}
+                            </x-primary-button>
                         </div>
                     </form>
                 </div>

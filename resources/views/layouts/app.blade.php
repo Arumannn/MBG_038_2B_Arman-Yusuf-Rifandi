@@ -9,26 +9,39 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+        <style>
+            :root {
+                --primary-accent: #ffbb31;
+                --primary-dark: #040348;
+                --neutral-tone: #949ea2;
+                --soft-pink: #c8a6a1;
+                --background-neutral: #cbcdc4;
+                --light-background: #f1e9dc;
+            }
+        </style>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <body class="font-sans antialiased" style="background-color: #f1e9dc;">
+        <div class="min-h-screen" style="background: linear-gradient(135deg, #f1e9dc 0%, #cbcdc4 100%);">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                <header class="shadow-lg" style="background: linear-gradient(135deg, #040348 0%, #1a1a5e 100%); border-bottom: 3px solid #ffbb31;">
+                    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+                        <div class="text-white">
+                            {{ $header }}
+                        </div>
                     </div>
                 </header>
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="pb-12">
                 {{ $slot }}
             </main>
         </div>
